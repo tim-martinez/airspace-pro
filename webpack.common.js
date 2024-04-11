@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: {
@@ -8,6 +9,13 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: './src/index.html',
+    }),
+    new CopyPlugin({
+      patterns: [
+        // Define patterns for files you wish to copy
+        { from: 'src/images', to: 'images' }, // Copies all files from src/images to dist/images
+        { from: 'src/videos', to: 'videos' }, // Copies all files from src/videos to dist/videos
+      ],
     }),
   ],
   output: {
@@ -27,6 +35,10 @@ module.exports = {
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/i,
+        type: 'asset/resource',
+      },
+      {
+        test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,
         type: 'asset/resource',
       },
     ],

@@ -1,2 +1,4 @@
 import './style.css';
-console.log('webpack-template');
+import { videoPlayOnView } from './modules/video';
+
+videoPlayOnView();
